@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, email, ticket } = body;
+    const { firstName, lastName, email, phoneNumber, ticket } = body;
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !ticket) {
+    if (!firstName || !lastName || !email || !phoneNumber || !ticket) {
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 }
@@ -38,16 +38,16 @@ export async function POST(request: NextRequest) {
     // Check if the sheet has headers
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: "Sheet1!A1:D1",
+      range: "Sheet1!A1:E1",
     });
 
-    const headers = ["First Name", "Last Name", "Email", "Ticket"];
+    const headers = ["First Name", "Last Name", "Email", "Phone Number", "Ticket"];
 
     // If no headers exist, add them
     if (!response.data.values || response.data.values.length === 0) {
       await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: "Sheet1!A1:D1",
+        range: "Sheet1!A1:E1",
         valueInputOption: "RAW",
         requestBody: {
           values: [headers],
@@ -58,10 +58,10 @@ export async function POST(request: NextRequest) {
     // Append the new row
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: "Sheet1!A:D",
+      range: "Sheet1!A:E",
       valueInputOption: "RAW",
       requestBody: {
-        values: [[firstName, lastName, email, ticket]],
+        values: [[firstName, lastName, email, phoneNumber, ticket]],
       },
     });
 

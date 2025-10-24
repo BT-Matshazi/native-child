@@ -27,6 +27,7 @@ export function WaitingListDialog({ ticketTitle }: WaitingListDialogProps) {
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
     ticket: ticketTitle || "",
   });
 
@@ -64,6 +65,7 @@ export function WaitingListDialog({ ticketTitle }: WaitingListDialogProps) {
         firstName: "",
         lastName: "",
         email: "",
+        phoneNumber: "",
         ticket: ticketTitle || "",
       });
     } catch (error) {
@@ -122,6 +124,18 @@ export function WaitingListDialog({ ticketTitle }: WaitingListDialogProps) {
                 name="email"
                 type="email"
                 value={formData.email}
+                onChange={handleInputChange}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="phoneNumber">Phone Number</Label>
+              <Input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="tel"
+                value={formData.phoneNumber}
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
