@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface WaitingListDialogProps {
   ticketTitle?: string;
@@ -57,7 +58,7 @@ export function WaitingListDialog({ ticketTitle }: WaitingListDialogProps) {
       }
 
       // Success!
-      alert("Successfully added to waiting list!");
+      toast.success("Successfully added to waiting list!");
       setIsOpen(false);
       setFormData({
         firstName: "",
@@ -67,7 +68,7 @@ export function WaitingListDialog({ ticketTitle }: WaitingListDialogProps) {
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Failed to submit form. Please try again.");
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

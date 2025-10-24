@@ -15,19 +15,24 @@ export async function POST(request: NextRequest) {
     }
 
     // Set up Google Sheets API credentials
+    const serviceAccountKey = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+
+    if (!serviceAccountKey) {
+      throw new Error("Google Service Account Key not configured");
+    }
+
+    const credentials = JSON.parse(serviceAccountKey);
+
     const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      },
+      credentials: credentials,
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
     const sheets = google.sheets({ version: "v4", auth });
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID;
 
     if (!spreadsheetId) {
-      throw new Error("Google Sheet ID not configured");
+      throw new Error("Google Spreadsheet ID not configured");
     }
 
     // Check if the sheet has headers
