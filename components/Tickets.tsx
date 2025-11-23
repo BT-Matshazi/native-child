@@ -162,7 +162,7 @@ export default function Tickets() {
               </div>
 
               {/* Add to Cart Button */}
-              <Link href="https://wa.me/message/E6LOSN5XESLXF1">
+              <Link href="https://wa.me/message/E6LOSN5XESLXF1" target="_blank">
                 <Button
                   className={`w-full uppercase tracking-wider text-xs font-semibold py-4 h-auto transition-colors duration-200 bg-[#2c2c2c] hover:bg-[#1a1a1a]`}
                 >
