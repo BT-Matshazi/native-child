@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { WaitingListDialog } from "./WaitingListBtn";
+import Link from "next/link";
 
 interface ProductCard {
   id: number;
@@ -161,17 +162,14 @@ export default function Tickets() {
               </div>
 
               {/* Add to Cart Button */}
-              {/* <Button
-                onClick={() => handleAddToCart(card)}
-                className={`w-full uppercase tracking-wider text-xs font-semibold py-4 h-auto transition-colors duration-200 ${
-                  addedToCart === card.id
-                    ? "bg-green-600 hover:bg-green-700"
-                    : "bg-[#2c2c2c] hover:bg-[#1a1a1a]"
-                }`}
-              >
-                {addedToCart === card.id ? "ADDED!" : "ADD TO CART"}
-              </Button> */}
-              <WaitingListDialog ticketTitle={card.title} />
+              <Link href="https://wa.me/message/E6LOSN5XESLXF1">
+                <Button
+                  className={`w-full uppercase tracking-wider text-xs font-semibold py-4 h-auto transition-colors duration-200 bg-[#2c2c2c] hover:bg-[#1a1a1a]`}
+                >
+                  ORDER TICKET
+                </Button>
+              </Link>
+              {/* <WaitingListDialog ticketTitle={card.title} /> */}
             </div>
           </SwiperSlide>
         ))}
